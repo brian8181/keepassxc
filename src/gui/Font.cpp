@@ -18,15 +18,16 @@
 #include "Font.h"
 
 #include <QFontDatabase>
+#include <QGuiApplication>
 
 QFont Font::defaultFont()
 {
-    return QFontDatabase::systemFont(QFontDatabase::GeneralFont);
+    return qApp->font();
 }
 
 QFont Font::fixedFont()
 {
-    QFont fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+    auto fixedFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
 
 #ifdef Q_OS_WIN
     // try to use Consolas on Windows, because the default Courier New has too many similar characters
@@ -42,5 +43,6 @@ QFont Font::fixedFont()
     fixedFont = QFontDatabase().font("Menlo", defaultFont.styleName(), defaultFont.pointSize());
 #endif
 
+    fixedFont.setPointSize(qApp->font().pointSize());
     return fixedFont;
 }
