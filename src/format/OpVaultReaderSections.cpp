@@ -161,8 +161,8 @@ QString OpVaultReader::resolveAttributeName(const QString& section, const QStrin
                    || lowName == "website") {
             return EntryAttributes::URLKey;
         }
-        return name;
+        return text;
     }
 
-    return QString("%1_%2").arg(section, name);
+    return QString("%1_%2").arg(section, text);
 }
